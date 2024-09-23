@@ -174,46 +174,40 @@ https://engineeringxpert.com/wp-content/uploads/2022/04/26.png
 
 ## STM 32 CUBE PROGRAM :
 ```
+
 #include "main.h"
 #include "lcd.h"
 
 void SystemClock_Config(void);
-static void MX_GPIO_Init(void);
+static void MX_GPIO_Init(void);	
 
 int main(void)
 {
   HAL_Init();
-  
   SystemClock_Config();
-
   MX_GPIO_Init();
- 
-  Lcd_PortType ports[] = {GPIOA,GPIOA,GPIOA,GPIOA};
-    Lcd_PinType pins[] = {GPIO_PIN_3,GPIO_PIN_2,GPIO_PIN_1,GPIO_PIN_0};
-    Lcd_HandleTypeDef lcd;
-    lcd = Lcd_create(ports,pins,GPIOB,GPIO_PIN_0,GPIOB,GPIO_PIN_1,LCD_4_BIT_MODE);
-    Lcd_cursor(&lcd, 0,0);
-    Lcd_string(&lcd, "SATHISH R");
+  Lcd_PortType ports[]={GPIOA,GPIOA,GPIOA,GPIOA};
+  Lcd_PinType pins[]={GPIO_PIN_3,GPIO_PIN_2,GPIO_PIN_1,GPIO_PIN_0};
+  Lcd_HandleTypeDef lcd;
 
-    Lcd_cursor(&lcd,1,0);
-        Lcd_string(&lcd, "212222100048");
-        HAL_Delay(500);
+  lcd = Lcd_create(ports,pins,GPIOB,GPIO_PIN_0,GPIOB,GPIO_PIN_1,LCD_4_BIT_MODE);
+  Lcd_cursor(&lcd,0,1);
+  Lcd_string(&lcd,"SRIVATSAN");
+  Lcd_cursor(&lcd,1,0);
+         Lcd_string(&lcd, "212223110053");
+         HAL_Delay(500);
   while (1)
   {
-    
-  }
- 
-}
 
+  }
+}
 
 void SystemClock_Config(void)
 {
   RCC_OscInitTypeDef RCC_OscInitStruct = {0};
   RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
-
   __HAL_RCC_PWR_CLK_ENABLE();
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE2);
-
   RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
@@ -222,7 +216,6 @@ void SystemClock_Config(void)
   {
     Error_Handler();
   }
-
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
   RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
@@ -235,12 +228,9 @@ void SystemClock_Config(void)
     Error_Handler();
   }
 }
-
-
 static void MX_GPIO_Init(void)
 {
   GPIO_InitTypeDef GPIO_InitStruct = {0};
-
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
 
@@ -248,12 +238,14 @@ static void MX_GPIO_Init(void)
 
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0|GPIO_PIN_1, GPIO_PIN_RESET);
 
+  /*Configure GPIO pins : PA0 PA1 PA2 PA3 */
   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1|GPIO_PIN_2|GPIO_PIN_3;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+  /*Configure GPIO pins : PB0 PB1 */
   GPIO_InitStruct.Pin = GPIO_PIN_0|GPIO_PIN_1;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
@@ -265,6 +257,7 @@ static void MX_GPIO_Init(void)
 
 void Error_Handler(void)
 {
+
   __disable_irq();
   while (1)
   {
@@ -275,10 +268,12 @@ void Error_Handler(void)
 
 void assert_failed(uint8_t *file, uint32_t line)
 {
-  
-}
 
+}
 #endif 
+
+
+
 
 ```
 
@@ -286,10 +281,13 @@ void assert_failed(uint8_t *file, uint32_t line)
 
 
 ## Output screen shots of proteus  :
+![image](https://github.com/user-attachments/assets/291d018d-6d84-46d2-b63e-62ef6e4f5ffe)
+
  
  
  ## CIRCUIT DIAGRAM (EXPORT THE GRAPHICS TO PDF AND ADD THE SCREEN SHOT HERE): 
- 
+ ![WhatsApp Image 2024-09-23 at 08 57 17_38abbbc1](https://github.com/user-attachments/assets/734d7945-515e-4394-a0c4-d3a0cb034c6f)
+
  
 ## Result :
 Interfacing a lcd display with ARM microcontroller are simulated in proteus and the results are verified.
